@@ -7,7 +7,7 @@ module.exports = class Contenedor{
 
     async save(producto){
         try {
-            const contenido = await this.getAll()
+            const contenido = await this.getAll() || []
             console.log(contenido)
             let id
             if(!producto.id || contenido.some(el => el.id === id)){
@@ -24,7 +24,7 @@ module.exports = class Contenedor{
             }
             producto.id = id
             contenido.push(producto)
-            fs.promises.writeFile(this.ruta, JSON.stringify(contenido, null, 2), "utf-8")
+            await fs.promises.writeFile(this.ruta, JSON.stringify(contenido, null, 2), "utf-8")
         } catch (error) {
             console.log("💥 Hubo un error al guardar en el archivo: " + error)
         }

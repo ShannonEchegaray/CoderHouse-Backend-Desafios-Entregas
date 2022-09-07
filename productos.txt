@@ -1,7 +1,0 @@
-[
-  {
-    "name": "prueba3",
-    "thumbnail": "https://prueba.test/",
-    "id": 3
-  }
-]

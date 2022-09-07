@@ -2,6 +2,7 @@ const Contenedor = require("./desafio\ 2.js")
 
 const objeto = new Contenedor("productos.txt");
 const prueba = async () => {
+
     await objeto.save({name: "prueba1", thumbnail: "https://prueba.test/"})
     await objeto.save({name: "prueba2", thumbnail: "https://prueba.test/"})
     await objeto.save({name: "prueba3", thumbnail: "https://prueba.test/"})
