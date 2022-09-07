@@ -1,13 +1,14 @@
 const fs = require("fs")
 
-class Contenedor{
+module.exports = class Contenedor{
     constructor(nombreArchivo){
-        this.ruta = nombreArchivo
+        this.ruta = `./${nombreArchivo}`
     }
 
     async save(producto){
         try {
             const contenido = await this.getAll()
+            console.log(contenido)
             let id
             if(!producto.id || contenido.some(el => el.id === id)){
                 switch(contenido.length){
@@ -23,9 +24,9 @@ class Contenedor{
             }
             producto.id = id
             contenido.push(producto)
-            fs.promises.writeFile(`${this.ruta}`, JSON.stringify(contenido), "utf-8")
+            fs.promises.writeFile(this.ruta, JSON.stringify(contenido, null, 2), "utf-8")
         } catch (error) {
-            console.log("💥 Hubo un error leer el archivo: " + error)
+            console.log("💥 Hubo un error al guardar en el archivo: " + error)
         }
     }
 
@@ -39,9 +40,7 @@ class Contenedor{
 
     async getAll(){
         try {
-            console.log("leyendo archivo...")
-            const contenido = await fs.promises.readFile(`./${this.ruta}`, "utf-8")
-            console.log(contenido)
+            const contenido = await fs.promises.readFile(this.ruta, "utf-8")
             return JSON.parse(contenido)
         } catch (error) {
             console.log("💥 No se pudo leer el archivo: " + error)
@@ -50,7 +49,9 @@ class Contenedor{
 
     async deleteById(id){
         try {
-            await fs.promises.writeFile(`./${this.ruta}`, JSON.stringify((await this.getAll()).filter(el => el.id !== id)))
+            const newArray = (await this.getAll()).filter(el => el.id !== id)
+            await fs.promises.writeFile(this.ruta, JSON.stringify(newArray, null, 2))
+            console.log(`Se elimino el id de producto ${id}`)
         } catch (error) {
             console.log("💥 Hubo un error al sobrescribir el archivo: " + error)
         }
@@ -58,21 +59,10 @@ class Contenedor{
 
     async deleteAll(){
         try {
-            await fs.promises.writeFile(`./${this.ruta}`, "[]")
+            await fs.promises.writeFile(this.ruta, "[]")
         } catch (error) {
             console.log("💥 Hubo un error al sobrescribir el archivo: " + error)
         }
     }
 }
 
-const objeto = new Contenedor("productos.txt");
-const prueba = async () => {
-    let contador = 0;
-    while(contador < 50){
-        await objeto.save({name: "prueba"})
-        contador++
-    }
-    console.log(await objeto.getById(2))
-    console.log(await objeto.getAll())
-}
-prueba()
