@@ -2,7 +2,7 @@ const fs = require("fs")
 
 module.exports = class Contenedor{
     constructor(nombreArchivo){
-        this.ruta = `./${nombreArchivo}`
+        this.ruta = `${nombreArchivo}`
     }
 
     async save(producto){
