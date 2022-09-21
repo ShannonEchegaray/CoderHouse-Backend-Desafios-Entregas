@@ -14,11 +14,10 @@ app.use("/api", router)
 
 app.use((error, req, res, next) => {
   if(error.statusCode){
-    console.log("Estoy aca")
     return res.status(error.statusCode).json({error: error.message})
   }
   console.log(error)
-  res.status(500).json({error: "Somethings brokes..."})
+  res.status(500).json({error: "Something brokes..."})
 })
 
 // listen for requests :)

@@ -2,21 +2,21 @@ module.exports = [
     {
         id: 1,
         nombre: "Remera",
-        precio: 55,
+        precio: 30,
     },
     {
         id: 2,
-        nombre: "Remera",
-        precio: 55,
+        nombre: "Camiseta",
+        precio: 50,
     },
     {
         id: 3,
-        nombre: "Remera",
-        precio: 55,
+        nombre: "Shorts",
+        precio: 40,
     },
     {
         id: 4,
-        nombre: "Remera",
-        precio: 55,
+        nombre: "Traje",
+        precio: 130,
     },
 ] 

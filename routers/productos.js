@@ -59,6 +59,8 @@ const validarProducto = (producto) => {
         throw error
     }
 
+    producto.precio = +producto.precio
+
     return producto
 }
 

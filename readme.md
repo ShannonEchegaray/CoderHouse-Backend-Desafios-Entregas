@@ -9,16 +9,17 @@ Este es un proyecto en donde se va a hacer una API Restful interactiva para prob
 - Para poder iniciar el proyecto se debe clonar o descargar el repositorio
 
 ```
-git clone https://github.com/ShannonEchegaray/Desarollo-Backend---Shannon-Echegaray/tree/desafio-4
+git clone https://github.com/ShannonEchegaray/Desarollo-Backend---Shannon-Echegaray
 ```
 
-- A continuacion, ya descargado ejecutar el siguiente comando desde la carpeta "Desarrollo-Backend---Shannon-Echegaray"
+- A continuacion, ya descargado ejecutar los siguiente comando desde la carpeta "Desarrollo-Backend---Shannon-Echegaray"
 
 ```
+git checkout desafio-4
 npm install
 ```
 
-- Luego ya ejecutado, crear un archivo llamado ".env" y dentro escribir lo siguiente
+- Ya ejecutado, crear un archivo llamado ".env" y dentro escribir lo siguiente
 
 ```
 PORT=8080
