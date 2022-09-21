@@ -1,7 +1,9 @@
 # Proyecto API Restful
 
+![Imagen de express.js](https://i.imgur.com/ksVYRtt.png)
+
 Este es un proyecto en donde se va a hacer una API Restful interactiva para probar los metodos **GET, POST, PUT, DELETE**
----
+
 ## Configuracion
 
 - Para poder iniciar el proyecto se debe clonar o descargar el repositorio
