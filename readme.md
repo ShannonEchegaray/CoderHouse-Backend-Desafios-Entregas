@@ -1,30 +1,32 @@
-# hello-express
+# Proyecto API Restful
 
-A server that serves a webpage, its resources, and some data
+Este es un proyecto en donde se va a hacer una API Restful interactiva para probar los metodos **GET, POST, PUT, DELETE**
+---
+## Configuracion
 
+- Para poder iniciar el proyecto se debe clonar o descargar el repositorio
 
-## Your Project
+```
+git clone https://github.com/ShannonEchegaray/Desarollo-Backend---Shannon-Echegaray/tree/desafio-4
+```
 
-On the front-end,
+- A continuacion, ya descargado ejecutar el siguiente comando desde la carpeta "Desarrollo-Backend---Shannon-Echegaray"
 
-- Edit `views/index.html` to change the content of the webpage
-- `public/client.js` is the javacript that runs when you load the webpage
-- `public/style.css` is the styles for `views/index.html`
-- Drag in `assets`, like images or music, to add them to your project
+```
+npm install
+```
 
-On the back-end,
+- Luego ya ejecutado, crear un archivo llamado ".env" y dentro escribir lo siguiente
 
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+```
+PORT=8080
+NODE_ENV=local
+```
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy.
+- Por ultimo ejecutar el comando
 
+```
+npm start
+```
 
-## Made by [Glitch](https://glitch.com/)
-
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
-
-Find out more [about Glitch](https://glitch.com/about).
-
-( ᵔ ᴥ ᵔ )
+*Se dejara en el repositorio un export de los metodos utilizados para poder hacer llamadas a la API, El archivo es "Collection Desafio 4.postman-collection.json"*
