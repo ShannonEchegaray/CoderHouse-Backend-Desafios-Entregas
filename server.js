@@ -1,31 +1,27 @@
-// server.js
-// where your node app starts
-const Contenedor = require("./contenedor.js")
-const productos = new Contenedor("productos.txt")
+const router = require("./routers/productos")
 // init project
 const express = require("express");
+const bodyParser = require('body-parser');
+const path = require("path");
 const app = express();
 
-const PORT = 8080
-// we've started you off with Express,
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-// http://expressjs.com/en/starter/basic-routing.html
-app.get("/", async (req, res) => {
-  const response = await productos.getAll()
-  res.json(response)
-});
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get("/productos", async (req, res) => {
-  res.json(await productos.getAll())
-});
+app.use(express.static(path.join(__dirname, "static")))
 
-app.get("/productoRandom", async (req, res) => {
-  const prods = await productos.getAll()
-  const numeroRandom = Math.floor(Math.random() * prods.length)
-  res.json(await prods[numeroRandom])
-});
+app.use("/api", router)
+
+app.use((error, req, res, next) => {
+  if(error.statusCode){
+    console.log("Estoy aca")
+    return res.status(error.statusCode).json({error: error.message})
+  }
+  console.log(error)
+  res.status(500).json({error: "Somethings brokes..."})
+})
 
 // listen for requests :)
-const listener = app.listen(PORT, function() {
+const listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
 })
