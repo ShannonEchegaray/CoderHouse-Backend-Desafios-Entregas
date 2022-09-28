@@ -1,30 +1,40 @@
-# hello-express
+# Proyecto API Restful
 
-A server that serves a webpage, its resources, and some data
+![Imagen de express.js](https://i.imgur.com/ksVYRtt.png)
 
+Este es un proyecto en donde se va a utilizar un motor de plantillas, en este caso **pug**
 
-## Your Project
+# ¿Por que pug?
 
-On the front-end,
+pug es el motor de plantillas que me parecio mas sencillo en terminos de sintaxis
 
-- Edit `views/index.html` to change the content of the webpage
-- `public/client.js` is the javacript that runs when you load the webpage
-- `public/style.css` is the styles for `views/index.html`
-- Drag in `assets`, like images or music, to add them to your project
+## Configuracion
 
-On the back-end,
+- Para poder iniciar el proyecto se debe clonar o descargar el repositorio
 
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+```
+git clone https://github.com/ShannonEchegaray/Desarollo-Backend---Shannon-Echegaray
+```
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy.
+- A continuacion, ya descargado ejecutar los siguiente comando desde la carpeta "Desarrollo-Backend---Shannon-Echegaray"
 
+```
+git checkout desafio-4
+npm install
+```
 
-## Made by [Glitch](https://glitch.com/)
+- Ya ejecutado, crear un archivo llamado ".env" y dentro escribir lo siguiente
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+```
+PORT=8080
+NODE_ENV=local
+NODE_URL="http://localhost:8080/"
+```
 
-Find out more [about Glitch](https://glitch.com/about).
+- Por ultimo ejecutar el comando
 
-( ᵔ ᴥ ᵔ )
+```
+npm start
+```
+
+*Se dejara en el repositorio un export de los metodos utilizados para poder hacer llamadas a la API, El archivo es "Collection Desafio 4.postman-collection.json"*
