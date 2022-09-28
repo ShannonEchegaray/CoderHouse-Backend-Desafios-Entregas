@@ -1,12 +1,12 @@
-# Proyecto API Restful
+# Motores de plantillas
 
-![Imagen de express.js](https://i.imgur.com/ksVYRtt.png)
+![Imagen de PUG](https://i.imgur.com/Wfu2H4D.png)
 
 Este es un proyecto en donde se va a utilizar un motor de plantillas, en este caso **pug**
 
 # ¿Por que pug?
 
-pug es el motor de plantillas que me parecio mas sencillo en terminos de sintaxis
+pug es el motor de plantillas que me parecio mas sencillo en terminos de sintaxis, lo que me facilito la elaboracion del codigo
 
 ## Configuracion
 
