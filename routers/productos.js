@@ -23,7 +23,6 @@ router.get("/productos", (req, res) => {
 
 router.post("/productos", (req, res, next) => {
     try {
-        console.log({...req.body})
         const producto = ListaProductos.validarProducto({...req.body})
         ListaProductos.agregarProducto({id: id++, ...producto})
 

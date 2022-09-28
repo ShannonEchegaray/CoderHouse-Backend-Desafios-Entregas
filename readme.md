@@ -37,4 +37,4 @@ NODE_URL="http://localhost:8080/"
 npm start
 ```
 
-*Se dejara en el repositorio un export de los metodos utilizados para poder hacer llamadas a la API, El archivo es "Collection Desafio 4.postman-collection.json"*
+*Se dejara en el repositorio un export de los metodos utilizados para poder hacer llamadas a la API, El archivo es "Collection Desafio 5.postman_collection.json"*
