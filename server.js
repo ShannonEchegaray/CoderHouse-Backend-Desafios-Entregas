@@ -12,8 +12,6 @@ const PORT = process.env.PORT
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, "static")))
-app.set("views", path.join(__dirname, "views"))
-app.set("view engine", "pug")
 
 app.use((error, req, res, next) => {
   if(error.statusCode){

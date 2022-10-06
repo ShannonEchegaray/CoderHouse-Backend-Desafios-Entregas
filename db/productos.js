@@ -1,8 +1,11 @@
 class ListaProductos{
+    static _id = 1;
     static _Productos = [];
 
     static agregarProducto(producto){
+        producto = {id: ListaProductos._id, ...producto}
         ListaProductos._Productos.push(producto)
+        ListaProductos._id++
     }
 
     static obtenerProductos(){
@@ -12,7 +15,6 @@ class ListaProductos{
     static validarID(id){
         if(isNaN(+id)){
             const error = new Error("El id no es un numero")
-            error.statusCode = 400
             throw error
         }
         return id
@@ -25,7 +27,6 @@ class ListaProductos{
     
         if(indexProd === -1){
             const error = new Error("No se ha encontrado el producto")
-            error.statusCode = 400
             throw error
         }
     
@@ -46,21 +47,18 @@ class ListaProductos{
         const keys = Object.keys(producto)
         if(keys.length !== 3){
             const error = new Error("Error en cantidad de parametros")
-            error.statusCode = 400
             throw error
         }
     
         for(let key of keys){
             if(key !== "nombre" && key !== "precio" && key !== "url"){
                 const error = new Error("Error en sintaxis de parametros")
-                error.statusCode = 400
                 throw error
             }
         }
     
         if(isNaN(producto.precio) || producto.precio === ""){
             const error = new Error("El precio no es un numero")
-            error.statusCode = 400
             throw error
         }
     
