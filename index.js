@@ -1,4 +1,4 @@
-const router = require("./routers/productos")
+const router = require("./routers/index")
 // init project
 const express = require("express");
 const bodyParser = require('body-parser');
