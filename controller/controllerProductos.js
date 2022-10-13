@@ -30,7 +30,6 @@ const agregarProducto = (req, res, next) => {
                                     ...req.body})
         res.status(200).json(id)
     } catch (error) {
-        console.log("ESTOY ACA")
         next(error);
     }
 }
@@ -50,8 +49,8 @@ const eliminarProducto = (req, res, next) => {
     try {
         const id = req.params.id
         validateNumber(id, "El id no es un numero");
-        const producto = productoApi.eliminarProducto(id);
-        res.status(204).json(producto)
+        productoApi.eliminarProducto(id);
+        res.status(204).send()
     } catch (error) {
         next(error)
     }

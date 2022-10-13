@@ -51,7 +51,7 @@ class Producto{
 
         if(data.length === dataFiltered.length) throw new NotFoundError("El id solicitado no se encuentra");
 
-        saveData(data, this.filename);
+        saveData(dataFiltered, this.filename);
     }
 }
 

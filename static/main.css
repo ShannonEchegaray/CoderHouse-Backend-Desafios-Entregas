@@ -1,9 +1,8 @@
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.object-fit{
+    object-fit: scale-down;
+    height: 8rem;
 }
 
-form > label{
-    display: block;
+.width18{
+    width: 18rem;
 }
