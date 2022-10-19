@@ -1,7 +1,5 @@
-const e = require("express");
 const {Server} = require("socket.io");
-const LProductos = require("./db/productos");
-const LMensajes = require("./db/mensajes");
+const {Productos, Mensajes} = require("./db/db")
 
 let io;
 
@@ -11,33 +9,39 @@ const initServer = (httpServer) => {
 }
 
 const setEvents = (io) => {
-        io.on("connection", (socketClient) => {
-            console.log("Se ha conectado un nuevo cliente, id: " + socketClient.id);
 
-            if (LProductos.obtenerProductos().length !== 0){
-                emit("product-history", LProductos.obtenerProductos())
-            }
-    
-            LMensajes.obtenerMensajes().then(async mensajes => {
-                if(mensajes.length !== 0){
-                    emit("message-history", mensajes)
-                } 
-            }) 
-    
-            socketClient.on("disconnection", () => {
-                console.log("Se ha desconectado el cliente con la id " + socketClient.id);
-            })
-    
-            socketClient.on("product", (data) => {
-                LProductos.agregarProducto(data)
-                emit("product", data)
-            })
-    
-            socketClient.on("message", async (data) => {
-                LMensajes.agregarMensaje(data)
-                emit("message", data)
-            })
-        }) 
+    const ProductosDB = new Productos();
+    ProductosDB.crearTabla();
+    const MensajesDB = new Mensajes();
+    MensajesDB.crearTabla();
+
+    io.on("connection", async (socketClient) => {
+        console.log("Se ha conectado un nuevo cliente, id: " + socketClient.id);
+
+        console.log(await ProductosDB.conseguirData())
+        if (await ProductosDB.conseguirData().length !== 0){
+            emit("product-history", await ProductosDB.conseguirData())
+        }
+        
+        console.log(await MensajesDB.conseguirData())
+        if (await MensajesDB.conseguirData().length !== 0){
+            emit("message-history", await MensajesDB.conseguirData())
+        }
+
+        socketClient.on("disconnection", () => {
+            console.log("Se ha desconectado el cliente con la id " + socketClient.id);
+        })
+
+        socketClient.on("product", async (data) => {
+            await ProductosDB.añadirData(data)
+            emit("product", await ProductosDB.conseguirData())
+        })
+
+        socketClient.on("message", async (data) => {
+            await MensajesDB.añadirData(data)
+            emit("message", await MensajesDB.conseguirData())
+        })
+    }) 
     
 } 
 

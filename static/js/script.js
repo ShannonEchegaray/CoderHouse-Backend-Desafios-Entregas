@@ -15,16 +15,15 @@
 
     productForm.onsubmit = (e) => {
         e.preventDefault();
-        socket.emit("product", {name: productNameInput.value,
-                                price: productPriceInput.value,
+        socket.emit("product", {nombre: productNameInput.value,
+                                precio: productPriceInput.value,
                                 url: productUrlInput.value })
     }
 
     messageForm.addEventListener("submit", (e) => {
         e.preventDefault();
         socket.emit("message", {email: emailInput.value,
-                                message: messageInput.value,
-                                time: new Date().toISOString()})
+                                message: messageInput.value})
     })
     
     socket.on("connect", () => {
@@ -35,9 +34,13 @@
         fetch("/js/templates/productoLayout.hbs")
             .then(template => template.text())
             .then(text => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = Handlebars.compile(text)(data)
-                tableBody.appendChild(tr)
+                tableBody.innerHTML = ""
+                const template = Handlebars.compile(text)
+                data.forEach(el => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = template(el)
+                    tableBody.appendChild(tr)
+                })      
             })
     })
 
@@ -58,9 +61,14 @@
         fetch("/js/templates/messageLayout.hbs")
             .then(template => template.text())
             .then(text => {
-                const li = document.createElement("li");
-                li.innerHTML = Handlebars.compile(text)(data)
-                messageOutput.appendChild(li)
+                messageOutput.innerHTML = ""
+                const template = Handlebars.compile(text)
+                data.forEach(el => {
+                    const li = document.createElement("li");
+                    li.classList.add("no-dots")
+                    li.innerHTML = template(el)
+                    messageOutput.appendChild(li)
+                })      
             })
     })
 
