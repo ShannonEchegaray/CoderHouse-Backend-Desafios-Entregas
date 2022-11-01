@@ -1,4 +1,4 @@
-const { UnauthorizedError } = require("../utils/errors");
+import { UnauthorizedError } from "../utils/errors.js";
 
 // Comento el codigo porque si no el frontend no funcionara correctamente
 
@@ -12,4 +12,4 @@ const validateAdmin = (req, res, next) => {
     next()
 }
 
-module.exports = validateAdmin
+export {validateAdmin}

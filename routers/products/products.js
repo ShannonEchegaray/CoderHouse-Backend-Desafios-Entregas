@@ -1,6 +1,6 @@
-const {Router} = require("express");
-const validateAdmin = require("../../controller/userControl")
-const { listarProductos, listarProductosId, agregarProducto, actualizarProducto, eliminarProducto } = require("../../controller/controllerProductos");
+import {Router} from "express";
+import {validateAdmin} from "../../controller/userControl.js";
+import { listarProductos, listarProductosId, agregarProducto, actualizarProducto, eliminarProducto } from "../../controller/controllerProductos.js";
 
 const router = Router();
 
@@ -10,4 +10,4 @@ router.post("/",validateAdmin, agregarProducto);
 router.put("/:id",validateAdmin, actualizarProducto);
 router.delete("/:id",validateAdmin, eliminarProducto);
 
-module.exports = router
+export default router

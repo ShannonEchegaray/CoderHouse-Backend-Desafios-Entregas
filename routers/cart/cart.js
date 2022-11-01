@@ -1,5 +1,5 @@
-const {Router} = require("express");
-const { agregarCarrito, eliminarCarrito, listarCarritoId, AgregarProductoIdCarrito, eliminarIdProductoIdCarrito } = require("../../controller/controllerCarrito");
+import {Router} from "express";
+import { agregarCarrito, eliminarCarrito, listarCarritoId, AgregarProductoIdCarrito, eliminarIdProductoIdCarrito } from "../../controller/controllerCarrito.js";
 
 const router = Router();
 
@@ -9,4 +9,4 @@ router.get("/:id/productos", listarCarritoId);
 router.post("/:id/productos", AgregarProductoIdCarrito);
 router.delete("/:id/productos/:id_prod", eliminarIdProductoIdCarrito);
 
-module.exports = router
+export default router

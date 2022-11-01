@@ -1,5 +1,5 @@
-const Carrito = require("../models/carrito");
-const {validateNumber, validateParams, productStructureKeys} = require("../utils/validation");
+import Carrito from "../models/carrito.js";
+import {validateNumber, validateParams, productStructureKeys} from "../utils/validation.js";
 
 const carritoApi = new Carrito("carritos.json");
 
@@ -55,7 +55,7 @@ const eliminarIdProductoIdCarrito = (req, res, next) => {
     }
 }
 
-module.exports = {
+export {
     listarCarritoId,
     agregarCarrito,
     eliminarCarrito,

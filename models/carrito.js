@@ -1,5 +1,5 @@
-const {readData, saveData} = require("../utils/manageData");
-const {NotFoundError} = require("../utils/errors");
+import {readData, saveData} from "../utils/manageData.js";
+import {NotFoundError} from "../utils/errors.js";
 
 class Carrito{
      constructor(filename){
@@ -64,4 +64,4 @@ class Carrito{
     }
 }
 
-module.exports = Carrito
+export default Carrito

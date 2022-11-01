@@ -1,5 +1,5 @@
-const Producto = require("../models/producto");
-const {validateNumber, validateParams, productStructureKeys} = require("../utils/validation");
+import Producto from "../models/producto.js";
+import {validateNumber, validateParams, productStructureKeys} from "../utils/validation.js";
 
 const productoApi = new Producto("productos.json");
 
@@ -56,7 +56,7 @@ const eliminarProducto = (req, res, next) => {
     }
 }
 
-module.exports = {
+export {
     listarProductos,
     actualizarProducto,
     listarProductosId,

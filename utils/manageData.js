@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "fs";
 
 const readData = (file) => {
     const data = fs.readFileSync(`./db/${file}`);
@@ -9,7 +9,7 @@ const saveData = (data, file) => {
     fs.writeFileSync(`./db/${file}`, JSON.stringify(data, null, 2));
 }
 
-module.exports = {
+export {
     readData,
     saveData
 }

@@ -1,4 +1,4 @@
-const {BadRequestError} = require("./errors");
+import {BadRequestError} from "./errors.js";
 
 const productStructureKeys = ["nombre","descripcion","codigo","foto","precio","stock"];
 
@@ -14,7 +14,7 @@ const validateParams = (params, objectToValidate) => {
     if(params.length !== Object.keys(objectToValidate).length) throw new BadRequestError("La cantidad de parametros es distinta")
 }
 
-module.exports = {
+export {
     validateNumber,
     validateParams,
     productStructureKeys

@@ -40,7 +40,7 @@ const errorHandler = (err, req, res, next) => {
     res.status(404).json({error: error.httpStatusCode, message: error.message})
 }
 
-module.exports = {
+export {
     errorHandler,
     NotFoundError,
     UnauthorizedError,
