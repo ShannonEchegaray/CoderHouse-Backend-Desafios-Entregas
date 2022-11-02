@@ -1,32 +1,34 @@
-import {readData, saveData} from "../utils/manageData.js";
-import {NotFoundError} from "../utils/errors.js";
+import ContFile from "../../contenedores/contFile.js";
+import {NotFoundError} from "../../utils/errors.js";
 
-class Carrito{
+class Carrito extends ContFile{
      constructor(filename){
-        this.filename = filename;
-        const data = readData(this.filename).sort((a,b) => a - b);
-        this.idCount = data[data.length - 1]?.id + 1 || 1;
+        super(filename);
+        super.read().then(data => {
+            data.sort((a,b) => a - b);
+            this.idCount = data[data.length - 1]?.id + 1 || 1;
+        })
     }
 
-    listarProductosIdCarrito(id){
-        const data = readData(this.filename);
+    async listarProductosIdCarrito(id){
+        const data = await super.read();
         const search = data.find(el => el.id === +id);
         if(!search) throw new NotFoundError("El id solicitado no se encuentra");
         return search.productos;
     }
 
-    agregarCarrito(cart){
+    async agregarCarrito(cart){
         cart = {id: this.idCount++, ...cart}
 
-        const data = readData(this.filename);
+        const data = await super.read();
         data.push(cart);
-        saveData(data, this.filename);
+        await super.save(data);
 
         return cart.id
     }
 
-    AgregarProductoIdCarrito(id, properties){
-        const data = readData(this.filename);
+    async AgregarProductoIdCarrito(id, properties){
+        const data = await super.read();
         const productToUpdate = data.findIndex(el => el.id === +id);
         console.log(productToUpdate)
         
@@ -34,12 +36,12 @@ class Carrito{
 
         data[productToUpdate].productos.push(properties)
 
-        saveData(data, this.filename);
+        await super.save(data);
         return properties
     }
 
-    eliminarIdProductoIdCarrito(idCarrito, idProducto){
-        const data = readData(this.filename);
+    async eliminarIdProductoIdCarrito(idCarrito, idProducto){
+        const data = await super.read();
 
         const cartToFilter = data.findIndex(el => el.id === +idCarrito);
         
@@ -51,16 +53,16 @@ class Carrito{
 
         data[cartToFilter].productos = dataFiltered
 
-        saveData(data, this.filename);
+        await super.save(data);
     }
 
-    eliminarCarrito(id){
-        const data = readData(this.filename);
+    async eliminarCarrito(id){
+        const data = await super.read();
         const dataFiltered = data.filter(el => el.id !== +id);
 
         if(data.length === dataFiltered.length) throw new NotFoundError("El id solicitado no se encuentra");
 
-        saveData(dataFiltered, this.filename);
+        await super.save(dataFiltered);
     }
 }
 

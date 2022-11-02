@@ -1,39 +1,40 @@
-import {readData, saveData} from "../utils/manageData.js";
-import {NotFoundError} from "../utils/errors.js";
+import contFile from "../../contenedores/contFile.js"
+import {NotFoundError} from "../../utils/errors.js";
 
-class Producto{
+class Producto extends contFile{
      constructor(filename){
-        this.filename = filename;
-        const data = readData(this.filename).sort((a,b) => a - b);
-        this.idCount = data[data.length - 1]?.id + 1 || 1;
+        super(filename);
+        super.read().then(data => {
+            data.sort((a,b) => a - b);
+            this.idCount = data[data.length - 1]?.id + 1 || 1;
+        })
     }
 
-    listarProductos(){
-        const data = readData(this.filename);
+    async listarProductos(){
+        const data = await super.read()
         return data;
     }
 
-    listarProductosId(id){
-        const data = readData(this.filename);
+    async listarProductosId(id){
+        const data = await super.read()
         const search = data.find(el => el.id === +id);
         if(!search) throw new NotFoundError("El id solicitado no se encuentra");
         return search;
     }
 
-    agregarProducto(product){
+    async agregarProducto(product){
         product = {id: this.idCount++, ...product}
 
-        const data = readData(this.filename);
+        const data = await super.read()
         data.push(product);
-        saveData(data, this.filename);
+        await super.save(data)
 
         return product.id
     }
 
-    actualizarProducto(id, properties){
-        const data = readData(this.filename);
+    async actualizarProducto(id, properties){
+        const data = await super.read();
         const productToUpdate = data.findIndex(el => el.id === +id);
-        console.log(productToUpdate)
         
         if(productToUpdate === -1) throw new NotFoundError("El id solicitado no se encuentra")
 
@@ -41,17 +42,17 @@ class Producto{
             data[productToUpdate][key] = properties[key]
         })
 
-        saveData(data, this.filename);
+        await super.save(data);
         return data[productToUpdate]
     }
 
-    eliminarProducto(id){
-        const data = readData(this.filename);
+    async eliminarProducto(id){
+        const data = await super.read(this.filename);
         const dataFiltered = data.filter(el => el.id !== +id);
 
         if(data.length === dataFiltered.length) throw new NotFoundError("El id solicitado no se encuentra");
 
-        saveData(dataFiltered, this.filename);
+        await super.save(dataFiltered);
     }
 }
 
