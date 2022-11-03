@@ -99,6 +99,7 @@
                         {
                             method: "PUT",
                             body: JSON.stringify({
+                                id: element.id,
                                 nombre,
                                 descripcion,
                                 codigo,

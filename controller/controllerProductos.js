@@ -1,7 +1,8 @@
-import Producto from "../daos/productos/file.js";
+import Producto from "../daos/productos/firestore.js";
+import schema from "../contenedores/mongo/productos.js"
 import {validateNumber, validateParams, productStructureKeys} from "../utils/validation.js";
 
-const productoApi = new Producto("productos.json");
+const productoApi = new Producto("productos");
 
 const listarProductos = async (req, res, next) => {
     try {
@@ -26,7 +27,7 @@ const listarProductosId = async (req, res, next) => {
 const agregarProducto = async (req, res, next) => {
     try {
         validateParams(productStructureKeys, req.body);
-        const id = await productoApi.agregarProducto({timestamp: Date.now(),
+        const id = await productoApi.agregarProducto({timestamp: new Date().toISOString(),
                                     ...req.body})
         res.status(200).json(id)
     } catch (error) {

@@ -1,13 +1,15 @@
-import Carrito from "../daos/carrito/file.js";
+import Carrito from "../daos/carrito/firestore.js";
+import schema from "../contenedores/mongo/carritos.js"
 import {validateNumber, validateParams, productStructureKeys} from "../utils/validation.js";
 
-const carritoApi = new Carrito("carritos.json");
+const carritoApi = new Carrito("carritos");
 
 const agregarCarrito = async (req, res, next) => {
     try {
-        const id = await carritoApi.agregarCarrito({timestamp: Date.now(), productos: []});
+        const id = await carritoApi.agregarCarrito({timestamp: new Date().toISOString(), productos: []});
         res.status(200).json(id);
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }
@@ -19,6 +21,7 @@ const eliminarCarrito = async (req, res, next) => {
         await carritoApi.eliminarCarrito(id);
         res.status(204).send()
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }
@@ -30,6 +33,7 @@ const listarCarritoId = async (req, res, next) => {
         const products = await carritoApi.listarProductosIdCarrito(id);
         res.status(200).json(products);
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }
@@ -40,6 +44,7 @@ const AgregarProductoIdCarrito = async (req, res, next) => {
         const newProduct = await carritoApi.AgregarProductoIdCarrito(req.params.id, req.body);
         res.status(200).json(newProduct)
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }
@@ -51,6 +56,7 @@ const eliminarIdProductoIdCarrito = async (req, res, next) => {
         await carritoApi.eliminarIdProductoIdCarrito(req.params.id, req.params.id_prod);
         res.status(204).send()
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }
