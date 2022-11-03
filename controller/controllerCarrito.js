@@ -15,7 +15,7 @@ switch(process.env.NODE_BASE){
     case "mongodb":
         Carrito = await import("../daos/carrito/mongodb.js");
         const schema = await import("../contenedores/mongo/carritos.js");
-        carritoApi = new Carrito.default(schema)
+        carritoApi = new Carrito.default(schema.default)
     break;
     case "firestore":
         Carrito = await import("../daos/carrito/firestore.js");

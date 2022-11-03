@@ -9,18 +9,17 @@ switch(process.env.NODE_BASE){
     break;
     case "file":
         Producto = await import("../daos/productos/file.js");
-        productoApi = new Producto.default("carritos.json")
+        productoApi = new Producto.default("productos.json")
     break;
     case "mongodb":
         Producto = await import("../daos/productos/mongodb.js");
         const schema = await import("../contenedores/mongo/productos.js");
-        console.log(Producto)
-        productoApi = new Producto.default(schema)
+        productoApi = new Producto.default(schema.default)
     break;
     case "firestore":
         Producto = await import("../daos/productos/firestore.js");
         console.log(Producto)
-        productoApi = new Producto.default("carritos")
+        productoApi = new Producto.default("productos")
 }
 
 const listarProductos = async (req, res, next) => {
@@ -39,6 +38,7 @@ const listarProductosId = async (req, res, next) => {
         const producto = await productoApi.listarProductosId(id);
         res.status(200).json(producto);
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }
@@ -50,6 +50,7 @@ const agregarProducto = async (req, res, next) => {
                                     ...req.body})
         res.status(200).json(id)
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }
@@ -62,6 +63,7 @@ const actualizarProducto = async (req, res, next) => {
         const newProduct = await productoApi.actualizarProducto(req.params.id, req.body)
         res.status(200).json(newProduct)
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }
@@ -73,6 +75,7 @@ const eliminarProducto = async (req, res, next) => {
         await productoApi.eliminarProducto(id);
         res.status(204).send()
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }
