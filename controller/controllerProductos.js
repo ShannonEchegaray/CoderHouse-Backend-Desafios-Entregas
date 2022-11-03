@@ -1,8 +1,25 @@
-import Producto from "../daos/productos/firestore.js";
-import schema from "../contenedores/mongo/productos.js"
 import {validateNumber, validateParams, productStructureKeys} from "../utils/validation.js";
 
-const productoApi = new Producto("productos");
+let Producto, productoApi;
+
+switch(process.env.NODE_BASE){
+    case "memory":
+        Producto = await import("../daos/productos/memory.js");
+        productoApi = new Producto()
+    break;
+    case "file":
+        Producto = await import("../daos/productos/file.js");
+        productoApi = new Producto("carritos.json")
+    break;
+    case "mongodb":
+        Producto = await import("../daos/productos/mongodb.js");
+        const schema = await import("../contenedores/mongo/productos.js");
+        productoApi = new Producto(schema)
+    break;
+    case "firestore":
+        Producto = await import("../daos/productos/firestore.js");
+        productoApi = new Producto("carritos")
+}
 
 const listarProductos = async (req, res, next) => {
     try {
@@ -37,8 +54,9 @@ const agregarProducto = async (req, res, next) => {
 
 const actualizarProducto = async (req, res, next) => {
     try {
-        validateParams(productStructureKeys, req.body);
+        console.log("probando")
         validateNumber(req.params.id, "El id no es un numero");
+        console.log("pase la prueba")
         const newProduct = await productoApi.actualizarProducto(req.params.id, req.body)
         res.status(200).json(newProduct)
     } catch (error) {

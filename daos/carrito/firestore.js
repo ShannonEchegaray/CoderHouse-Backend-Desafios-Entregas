@@ -47,13 +47,14 @@ class Carrito extends ContFirestore{
         
         if(cartToFilter === -1) throw new NotFoundError("El id de carrito solicitado no se encuentra")
 
-        const dataFiltered = data.docs[cartToFilter].data().productos.filter(el => el.data().id !== +idProducto);
-
+        const dataFiltered = data.docs[cartToFilter].data().productos.filter(el => el.id !== +idProducto);
+        
         if(data.docs[cartToFilter].data().productos.length === dataFiltered.length) throw new NotFoundError("El id de producto solicitado no se encuentra");
+        
+        const arrayProductos = data.docs[cartToFilter].data()
+        arrayProductos.productos = dataFiltered
 
-        data.docs[cartToFilter].data().productos = dataFiltered
-
-        await super.updateItem(data.docs[cartToFilter].id, data.docs[cartToFilter].id);
+        await super.updateItem(data.docs[cartToFilter].id, {productos: arrayProductos.productos});
     }
 
     async eliminarCarrito(id){

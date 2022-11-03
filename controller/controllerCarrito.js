@@ -1,8 +1,26 @@
-import Carrito from "../daos/carrito/firestore.js";
-import schema from "../contenedores/mongo/carritos.js"
 import {validateNumber, validateParams, productStructureKeys} from "../utils/validation.js";
 
-const carritoApi = new Carrito("carritos");
+let Carrito;
+let carritoApi;
+
+switch(process.env.NODE_BASE){
+    case "memory":
+        Carrito = await import("../daos/carrito/memory.js");
+        carritoApi = new Carrito()
+    break;
+    case "file":
+        Carrito = await import("../daos/carrito/file.js");
+        carritoApi = new Carrito("carritos.json")
+    break;
+    case "mongodb":
+        Carrito = await import("../daos/carrito/mongodb.js");
+        const schema = await import("../contenedores/mongo/carritos.js");
+        carritoApi = new Carrito(schema)
+    break;
+    case "firestore":
+        Carrito = await import("../daos/carrito/firestore.js");
+        carritoApi = new Carrito("carritos")
+}
 
 const agregarCarrito = async (req, res, next) => {
     try {

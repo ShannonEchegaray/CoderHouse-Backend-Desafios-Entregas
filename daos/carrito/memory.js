@@ -66,4 +66,4 @@ class Carrito extends ContMemory{
     }
 }
 
-export default Carrito
+export {Carrito}
