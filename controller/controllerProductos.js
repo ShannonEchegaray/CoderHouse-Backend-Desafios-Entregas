@@ -5,20 +5,22 @@ let Producto, productoApi;
 switch(process.env.NODE_BASE){
     case "memory":
         Producto = await import("../daos/productos/memory.js");
-        productoApi = new Producto()
+        productoApi = new Producto.default()
     break;
     case "file":
         Producto = await import("../daos/productos/file.js");
-        productoApi = new Producto("carritos.json")
+        productoApi = new Producto.default("carritos.json")
     break;
     case "mongodb":
         Producto = await import("../daos/productos/mongodb.js");
         const schema = await import("../contenedores/mongo/productos.js");
-        productoApi = new Producto(schema)
+        console.log(Producto)
+        productoApi = new Producto.default(schema)
     break;
     case "firestore":
         Producto = await import("../daos/productos/firestore.js");
-        productoApi = new Producto("carritos")
+        console.log(Producto)
+        productoApi = new Producto.default("carritos")
 }
 
 const listarProductos = async (req, res, next) => {

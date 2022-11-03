@@ -1,4 +1,4 @@
-import {validateNumber, validateParams, productStructureKeys} from "../utils/validation.js";
+import {validateNumber} from "../utils/validation.js";
 
 let Carrito;
 let carritoApi;
@@ -6,20 +6,20 @@ let carritoApi;
 switch(process.env.NODE_BASE){
     case "memory":
         Carrito = await import("../daos/carrito/memory.js");
-        carritoApi = new Carrito()
+        carritoApi = new Carrito.default()
     break;
     case "file":
         Carrito = await import("../daos/carrito/file.js");
-        carritoApi = new Carrito("carritos.json")
+        carritoApi = new Carrito.default("carritos.json")
     break;
     case "mongodb":
         Carrito = await import("../daos/carrito/mongodb.js");
         const schema = await import("../contenedores/mongo/carritos.js");
-        carritoApi = new Carrito(schema)
+        carritoApi = new Carrito.default(schema)
     break;
     case "firestore":
         Carrito = await import("../daos/carrito/firestore.js");
-        carritoApi = new Carrito("carritos")
+        carritoApi = new Carrito.default("carritos")
 }
 
 const agregarCarrito = async (req, res, next) => {
