@@ -6,7 +6,7 @@ class Producto extends ContFirestore{
        super(collection);
        super.read().then(data => {
            data.docs.sort((a,b) => a.id - b.id);
-           this.idCount = data.docs[data.docs.length - 1]?.id + 1 || 1;
+           this.idCount = data.docs[data.docs.length - 1]?.data().id + 2 || 1;
        })
    }
 
