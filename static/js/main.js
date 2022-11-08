@@ -38,8 +38,8 @@
 
             containerProductos.appendChild(div)
 
-            div.querySelector("#comprar" + element.id).onclick = () => {
-                fetch("http://localhost:8080/api/carrito/1/productos",
+            div.querySelector("#comprar" + element.id).onclick = async () => {
+                const comprarItem = await fetch("http://localhost:8080/api/carrito/1/productos",
                     {
                         method: "POST",
                         body: JSON.stringify({
@@ -54,28 +54,26 @@
                         }),
                         headers: {"Content-type": "application/json; charset=UTF-8"}
                     })
-                .then(data => {
-                    console.log(data.status)
-                    if(data.status !== 200){
-                        return fetch("http://localhost:8080/api/carrito",
-                        {method: "POST"}).then(fetch("http://localhost:8080/api/carrito/1/productos",
-                        {
-                            method: "POST",
-                            body: JSON.stringify({
-                            id: element.id,
-                            timestamp: element.timestamp,
-                            nombre: element.nombre,
-                            descripcion: element.descripcion,
-                            codigo: element.codigo,
-                            foto: element.foto,
-                            precio: element.precio,
-                            stock: element.stock
-                            }),
-                            headers: {"Content-type": "application/json; charset=UTF-8"}
-                        }))
-                    }
-                    renderCarrito()
-                })
+                if(comprarItem.status !== 200){
+                    await fetch("http://localhost:8080/api/carrito", {method: "POST"});
+                    await fetch("http://localhost:8080/api/carrito/1/productos", {
+                        method: "POST",
+                        body: JSON.stringify({
+                        id: element.id,
+                        timestamp: element.timestamp,
+                        nombre: element.nombre,
+                        descripcion: element.descripcion,
+                        codigo: element.codigo,
+                        foto: element.foto,
+                        precio: element.precio,
+                        stock: element.stock
+                        }),
+                        headers: {"Content-type": "application/json; charset=UTF-8"}
+                    })
+                }
+
+                await renderCarrito()
+                
             }
 
             if(admin){
@@ -90,12 +88,12 @@
                     </div>
                     `
 
-                    div.querySelector(`#modificarform${element.id}`).onclick = () => {
+                    div.querySelector(`#modificarform${element.id}`).onclick = async () => {
                         const nombre = div.querySelector(`#modificarform-nombre${element.id}`).value;
                         const descripcion = div.querySelector(`#modificarform-descripcion${element.id}`).value;
                         const codigo = div.querySelector(`#modificarform-codigo${element.id}`).value;
 
-                        fetch(`http://localhost:8080/api/productos/${element.id}`,
+                        await fetch(`http://localhost:8080/api/productos/${element.id}`,
                         {
                             method: "PUT",
                             body: JSON.stringify({
@@ -109,16 +107,15 @@
                             }),
                             headers: {"Content-type": "application/json; charset=UTF-8"} 
                         })
-                        .then(renderProductos())
+                        await renderProductos();
                     }
                 }
     
-                div.querySelector("#eliminar" + element.id).onclick = (e) => {
-                    fetch(`http://localhost:8080/api/productos/${element.id}`,
-                        {
+                div.querySelector("#eliminar" + element.id).onclick = async (e) => {
+                    await fetch(`http://localhost:8080/api/productos/${element.id}`, {
                             method: "DELETE"
-                        })
-                        .then(renderProductos())
+                    })
+                    await renderProductos();
                 }
             }
             
@@ -126,7 +123,7 @@
     }
 
     const renderCarrito = async () => {
-        const data = (await (await fetch("http://localhost:8080/api/carrito/1/productos")).json());
+        const data = await (await fetch("http://localhost:8080/api/carrito/1/productos")).json();
 
         containerCarrito.innerHTML = "";
         data.forEach(element => {
@@ -149,18 +146,18 @@
             containerCarrito.appendChild(div);
 
             if(admin){
-                div.querySelector("#eliminarcarrito" + element.id).onclick = (e) => {
-                    fetch(`http://localhost:8080/api/carrito/1/productos/${element.id}`,
-                    {
+                div.querySelector("#eliminarcarrito" + element.id).onclick = async (e) => {
+                    await fetch(`http://localhost:8080/api/carrito/1/productos/${element.id}`, {
                         method: "DELETE"
-                    }).then(renderCarrito())
+                    })
+                    await renderCarrito();
                 }
             }
             
         })
     }
 
-    formProducts.onsubmit = (e) => {
+    formProducts.onsubmit = async (e) => {
         e.preventDefault();
         const nombre = formProducts.querySelector("#form_nombre").value;
         const descripcion = formProducts.querySelector("#form_descripcion").value;
@@ -169,7 +166,7 @@
         const precio = formProducts.querySelector("#form_precio").value;
         const stock = formProducts.querySelector("#form_stock").value;
 
-        fetch("http://localhost:8080/api/productos", {
+        const newItem = await fetch("http://localhost:8080/api/productos", {
             method: "POST",
             body: JSON.stringify({
                 nombre,
@@ -180,8 +177,9 @@
                 stock
             }),
             headers: {"Content-type": "application/json; charset=UTF-8"}
-        }).then(data => data.json())
-          .then(renderProductos())
+        })
+        const parsedNewItem = await newItem.json();
+        await renderProductos();
     }
 
     renderProductos();

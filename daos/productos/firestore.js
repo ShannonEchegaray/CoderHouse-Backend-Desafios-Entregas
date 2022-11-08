@@ -33,10 +33,7 @@ class Producto extends ContFirestore{
 
    async actualizarProducto(id, properties){
        const data = await super.read();
-       const productToUpdate = data.docs.findIndex(el => el.data().id === +id);
-       
-        console.log("Probando")
-        
+       const productToUpdate = data.docs.findIndex(el => el.data().id === +id);        
 
        if(productToUpdate === -1) throw new NotFoundError("El id solicitado no se encuentra")
 
@@ -47,8 +44,6 @@ class Producto extends ContFirestore{
            document[key] = properties[key]
        })
 
-       console.log(properties)
-       console.log(document)
        await super.updateItem(data.docs[productToUpdate].id, document);
        return document
    }

@@ -18,7 +18,6 @@ class Carrito extends ContFirestore{
     }
 
     async agregarCarrito(cart){
-        console.log(this.idCount)
         cart = {id: this.idCount++, ...cart}
 
         await super.saveItem(cart)
@@ -40,7 +39,6 @@ class Carrito extends ContFirestore{
     }
 
     async eliminarIdProductoIdCarrito(idCarrito, idProducto){
-        console.log(idProducto, typeof idProducto)
         const data = await super.read();
 
         const cartToFilter = data.docs.findIndex(el => el.data().id === +idCarrito);

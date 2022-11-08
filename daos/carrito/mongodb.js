@@ -11,7 +11,6 @@ class Carrito extends ContMongoDB{
     }
 
     async listarProductosIdCarrito(id){
-        console.log(id)
         const data = await super.read();
         const search = data.find(el => el.id === +id);
         if(!search) throw new NotFoundError("El id solicitado no se encuentra");
@@ -29,13 +28,10 @@ class Carrito extends ContMongoDB{
     async AgregarProductoIdCarrito(id, properties){
         const data = await super.read();
         const productToUpdate = data.findIndex(el => el.id === +id);
-        console.log(productToUpdate)
         
         if(productToUpdate === -1) throw new NotFoundError("El id solicitado no se encuentra")
 
         data[productToUpdate].productos.push(properties)
-
-        console.log(data[productToUpdate])
 
         await super.updateItem(data[productToUpdate]._id, {productos: data[productToUpdate].productos});
         return properties

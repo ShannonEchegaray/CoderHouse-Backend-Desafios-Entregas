@@ -30,7 +30,6 @@ class Carrito extends ContMemory{
     async AgregarProductoIdCarrito(id, properties){
         const data = await super.read();
         const productToUpdate = data.findIndex(el => el.id === +id);
-        console.log(productToUpdate)
         
         if(productToUpdate === -1) throw new NotFoundError("El id solicitado no se encuentra")
 
@@ -66,4 +65,4 @@ class Carrito extends ContMemory{
     }
 }
 
-export default Carrito;
+export default Carrito

@@ -1,8 +1,6 @@
-# Proyecto API Restful
+# Entrega Proyecto 2
 
 ![Imagen de express.js](https://i.imgur.com/ksVYRtt.png)
-
-Este es un proyecto en donde se va a hacer una API Restful interactiva para probar los metodos **GET, POST, PUT, DELETE**
 
 ## Configuracion
 
@@ -38,12 +36,13 @@ messagingSenderId=
 appId=
 ```
 
-- Por ultimo ejecutar el comando
+- Por ultimo ejecutar los comandos
 
 ```
+mongod --dbpath ./
 npm start
 ```
 
-En el caso de usar el mongodb, usar la base que deje ya con sus colections
+En el caso de usar el mongodb, usar la base "mongodb" que deje ya con sus colections
 
 *Se dejara en el repositorio un export de los metodos utilizados para poder hacer llamadas a la API, El archivo es "Collection Desafio 4.postman-collection.json"*
