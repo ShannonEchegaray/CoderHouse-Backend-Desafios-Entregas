@@ -50,16 +50,36 @@
                     <ul class="no-dots" id="messageOutput"></ul>
                 </div>
                 <div>
-                    <form class="d-flex flex-row flex-wrap justify-content-evenly text-black" id="enviarMensaje" action="#">
-                        <div class="col-4 d-flex justify-content-center align-items-center">
+                    <form class="d-flex flex-column flex-wrap justify-content-evenly align-items-start text-black" id="enviarMensaje" action="#">
+                        <div class="col-3 d-flex flex-column justify-content-center align-items-center">
                             <label class="m-0 mx-2 form-label" for="email">Email</label>
                             <input required class="form-control" type="email" placeholder="Ingrese su E-mail..." name="email" id="emailInput">
                         </div>
-                        <div class="col-4 d-flex justify-content-center align-items-center">
+                        <div class="col-4 d-flex flex-column justify-content-center align-items-center">
                             <label class="m-0 mx-2 form-label" for="message">Mensaje</label>
                             <input class="form-control" required type="text" placeholder="Ingrese su mensaje..." name="message" id="messageInput">    
                         </div>
-                        <div class="mt-4 col-6 d-flex justify-content-center align-items-center">
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <label class="m-0 mx-2 form-label" for="name">Nombre</label>
+                            <input class="form-control" required type="text" placeholder="Ingrese su nombre..." name="name" id="nameInput">    
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <label class="m-0 mx-2 form-label" for="lastname">Apellido</label>
+                            <input class="form-control" required type="text" placeholder="Ingrese su apellido..." name="lastname" id="lastnameInput">    
+                        </div>
+                        <div class="col-1 d-flex flex-column justify-content-center align-items-center">
+                            <label class="m-0 mx-2 form-label" for="age">Edad</label>
+                            <input class="form-control" required type="number" placeholder="Ingrese su edad..." name="age" id="ageInput">    
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <label class="m-0 mx-2 form-label" for="alias">Alias</label>
+                            <input class="form-control" required type="text" placeholder="Ingrese su alias..." name="alias" id="aliasInput">    
+                        </div>
+                        <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                            <label class="m-0 mx-2 form-label" for="avatar">Avatar</label>
+                            <input class="form-control" required type="text" placeholder="Ingrese la url de su avatar..." name="avatar" id="avatarInput">    
+                        </div>
+                        <div class="mt-4 col-6 d-flex justify-content-start align-items-start">
                             <input class="btn btn-danger" type="submit" value="Enviar">
                         </div>
                     </form>

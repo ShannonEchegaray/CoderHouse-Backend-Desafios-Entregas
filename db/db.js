@@ -8,10 +8,10 @@ class DB {
     async conseguirData(){
         let data;
         try {
-            return await this.schema.find({})
+            return await this.schema.find({}, {__v: 0})
         } catch (error) {
-            console.log("Hubo un error al conseguir la data de la tabla " + this.schema + "\n" + error)
-            throw Error("error")
+            console.log("Hubo un error al conseguir data" + "\n" + error)
+            throw Error(error)
         }
     }
 
@@ -20,15 +20,15 @@ class DB {
             const result = await this.schema(data).save()
             return result
         } catch (error) {
-            console.log("Hubo un error al añadir la data de la coleccion " + this.schema + "\n" + error)
-            throw Error("error")
+            console.log("Hubo un error al añadir data"  + "\n" + error)
+            throw Error(error)
         }
     }
 }
 
 class Mensajes extends DB {
     constructor(){
-        super(new Schema({
+        super(mongoose.model("mensajes", new Schema({
             author: {
                 id: {type: String, required: true},
                 nombre: {type: String, required: true},
@@ -37,8 +37,9 @@ class Mensajes extends DB {
                 alias: {type: String, required: true},
                 avatar: {type: String, required: true}
             },
-            text: { type: String, required: true}
-        }))
+            text: { type: String, required: true},
+            created_at: {type: Date}
+        })))
     }
 
     async agregarMensaje(mensaje){
@@ -52,11 +53,11 @@ class Mensajes extends DB {
 
 class Productos extends DB {
     constructor(){
-        super(new Schema({
+        super(mongoose.model("productos", new Schema({
             nombre: {type: String, required: true},
             precio: {type: Number, required: true},
             url: {type: String, required: true}
-        }))
+        })))
     }
 
     async agregarProducto(producto){

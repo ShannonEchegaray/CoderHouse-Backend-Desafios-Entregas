@@ -1,4 +1,5 @@
 import {Server} from "socket.io"
+import mongoose from "mongoose"
 import {Productos, Mensajes} from "./db/db.js"
 
 let io;
@@ -9,6 +10,8 @@ const initServer = (httpServer) => {
 }
 
 const setEvents = (io) => {
+
+    mongoose.connect(`mongodb://localhost:27017/${process.env.NODE_DB}`)
 
     const ProductosDB = new Productos();
     const MensajesDB = new Mensajes();
@@ -31,12 +34,24 @@ const setEvents = (io) => {
         })
 
         socketClient.on("product", async (data) => {
+            console.log(data)
             await ProductosDB.agregarProducto(data)
             emit("product", await ProductosDB.leerProductos())
         })
 
-        socketClient.on("message", async (data) => {
-            await MensajesDB.agregarMensaje(data)
+        socketClient.on("message", async ({id, nombre, apellido, edad, alias, avatar, mensaje}) => {
+            await MensajesDB.agregarMensaje({
+                author: {
+                    id,
+                    nombre,
+                    apellido,
+                    edad,
+                    alias,
+                    avatar
+                },
+                text: mensaje,
+                created_at: Date.now()
+            })
             emit("message", await MensajesDB.leerMensajes())
         })
     }) 
