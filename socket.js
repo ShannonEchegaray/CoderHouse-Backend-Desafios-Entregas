@@ -11,21 +11,19 @@ const initServer = (httpServer) => {
 const setEvents = (io) => {
 
     const ProductosDB = new Productos();
-    ProductosDB.crearTabla();
     const MensajesDB = new Mensajes();
-    MensajesDB.crearTabla();
 
     io.on("connection", async (socketClient) => {
         console.log("Se ha conectado un nuevo cliente, id: " + socketClient.id);
 
-        console.log(await ProductosDB.conseguirData())
-        if (await ProductosDB.conseguirData().length !== 0){
-            emit("product-history", await ProductosDB.conseguirData())
+        console.log(await ProductosDB.leerProductos())
+        if (await ProductosDB.leerProductos().length !== 0){
+            emit("product-history", await ProductosDB.leerProductos())
         }
         
-        console.log(await MensajesDB.conseguirData())
-        if (await MensajesDB.conseguirData().length !== 0){
-            emit("message-history", await MensajesDB.conseguirData())
+        console.log(await MensajesDB.leerMensajes())
+        if (await MensajesDB.leerMensajes().length !== 0){
+            emit("message-history", await MensajesDB.leerMensajes())
         }
 
         socketClient.on("disconnection", () => {
@@ -33,13 +31,13 @@ const setEvents = (io) => {
         })
 
         socketClient.on("product", async (data) => {
-            await ProductosDB.añadirData(data)
-            emit("product", await ProductosDB.conseguirData())
+            await ProductosDB.agregarProducto(data)
+            emit("product", await ProductosDB.leerProductos())
         })
 
         socketClient.on("message", async (data) => {
-            await MensajesDB.añadirData(data)
-            emit("message", await MensajesDB.conseguirData())
+            await MensajesDB.agregarMensaje(data)
+            emit("message", await MensajesDB.leerMensajes())
         })
     }) 
     
