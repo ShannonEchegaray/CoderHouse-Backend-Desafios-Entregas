@@ -7,6 +7,8 @@
     const tableBody = document.getElementById("products")
 
     // Mensajes
+    const compressionText = document.getElementById("compresion")
+
     const messageForm = document.getElementById("enviarMensaje")
     const emailInput = document.getElementById("emailInput");
     const messageInput = document.getElementById("messageInput");
@@ -74,10 +76,13 @@
         fetch("/js/templates/messageLayout.hbs")
             .then(template => template.text())
             .then(text => {
-                console.log(data)
+                const parsedSize = JSON.stringify(data).length
+                data = denormalizar(data)
+                const originalSize = JSON.stringify(data).length
+                compressionText.innerHTML = `${((parsedSize * 100) / originalSize).toFixed(2)}%`
                 messageOutput.innerHTML = ""
                 const template = Handlebars.compile(text)
-                data.forEach(el => {
+                data.messages.forEach(el => {
                     const li = document.createElement("li");
                     li.classList.add("no-dots")
                     li.innerHTML = template(el)
@@ -86,13 +91,17 @@
             })
     })
 
-    socket.on("message-history", (messages) => {
+    socket.on("message-history", (data) => {
         fetch("/js/templates/messageLayout.hbs")
             .then(template => template.text())
             .then(text => {
-                console.log(messages)
+                const parsedSize = JSON.stringify(data).length
+                data = denormalizar(data)
+                const originalSize = JSON.stringify(data).length
+                console.log(originalSize, parsedSize)
+                compressionText.innerHTML = `${((parsedSize * 100) / originalSize).toFixed(2)}%`
                 const template = Handlebars.compile(text)
-                messages.forEach(el => {
+                data.messages.forEach(el => {
                     const li = document.createElement("li");
                     li.classList.add("no-dots")
                     li.innerHTML = template(el)
