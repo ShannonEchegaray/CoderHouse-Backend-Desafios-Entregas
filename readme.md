@@ -14,7 +14,7 @@ git clone https://github.com/ShannonEchegaray/Desarollo-Backend---Shannon-Echega
 - A continuacion, ya descargado ejecutar los siguiente comando desde la carpeta "Desarrollo-Backend---Shannon-Echegaray"
 
 ```
-git checkout desafio-8
+git checkout desafio-10
 npm install
 ```
 
@@ -35,4 +35,5 @@ NODE_DB=*Nombre de la base de datos*
 npm start
 ```
 
-*No se dejara Collection de Postman ya que no se utiliza en todo el desafio*
+*No se dejara Collection de Postman ya que no se utiliza en todo el desafio
+Se puede trabajar directamente con la pagina*
