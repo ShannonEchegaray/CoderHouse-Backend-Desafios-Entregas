@@ -1,12 +1,13 @@
 import mongoose, {Schema} from "mongoose";
 
+mongoose.connect("mongodb+srv://backend:Passw0rd@cluster0.rdtbnd0.mongodb.net/?retryWrites=true&w=majority");
+
 class DB {
     constructor(schema){
         this.schema = schema
     }
 
     async conseguirData(){
-        let data;
         try {
             return await this.schema.find({})
         } catch (error) {
@@ -28,7 +29,7 @@ class DB {
 
 class Mensajes extends DB {
     constructor(){
-        super(new Schema({
+        super(new Schema("mensajes", {
             author: {
                 id: {type: String, required: true},
                 nombre: {type: String, required: true},
@@ -52,7 +53,7 @@ class Mensajes extends DB {
 
 class Productos extends DB {
     constructor(){
-        super(new Schema({
+        super(new Schema("productos", {
             nombre: {type: String, required: true},
             precio: {type: Number, required: true},
             url: {type: String, required: true}

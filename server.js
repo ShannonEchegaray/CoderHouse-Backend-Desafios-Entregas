@@ -5,7 +5,7 @@ import http from "http";
 import bodyParser from "body-parser";
 import expressSession from "express-session";
 import MongoStore from "connect-mongo";
-import router from "./routes/products.js";
+import router from "./routes/index.js";
 const app = express();
 
 const PORT = process.env.PORT || 8080;
@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(expressSession({
   store: new MongoStore({
-    mongoUrl: "mongodb+srv://backend:<password>@cluster0.rdtbnd0.mongodb.net/?retryWrites=true&w=majority",
+    mongoUrl: "mongodb+srv://backend:Passw0rd@cluster0.rdtbnd0.mongodb.net/?retryWrites=true&w=majority",
     ttl: 10
   }),
   secret: "shhh",
