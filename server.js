@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(expressSession({
   store: new MongoStore({
     mongoUrl: "mongodb+srv://backend:Passw0rd@cluster0.rdtbnd0.mongodb.net/?retryWrites=true&w=majority",
-    ttl: 10
+    ttl: 60
   }),
   secret: "shhh",
   resave: true,

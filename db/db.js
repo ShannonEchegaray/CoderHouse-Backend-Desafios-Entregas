@@ -29,7 +29,7 @@ class DB {
 
 class Mensajes extends DB {
     constructor(){
-        super(new Schema("mensajes", {
+        super(mongoose.model("mensajes", {
             author: {
                 id: {type: String, required: true},
                 nombre: {type: String, required: true},
@@ -53,7 +53,7 @@ class Mensajes extends DB {
 
 class Productos extends DB {
     constructor(){
-        super(new Schema("productos", {
+        super(mongoose.model("productos", {
             nombre: {type: String, required: true},
             precio: {type: Number, required: true},
             url: {type: String, required: true}
