@@ -14,7 +14,7 @@ git clone https://github.com/ShannonEchegaray/Desarollo-Backend---Shannon-Echega
 - A continuacion, ya descargado ejecutar los siguiente comando desde la carpeta "Desarrollo-Backend---Shannon-Echegaray"
 
 ```
-git checkout desafio-10
+git checkout desafio-11
 npm install
 ```
 
@@ -24,9 +24,7 @@ npm install
 PORT=8080
 NODE_ENV=local
 NODE_URL="http://localhost:8080/"
-NODE_USER=*Usuario de la base de datos*
-NODE_PASS=*Contraseña del usuario de la base de datos*
-NODE_DB=*Nombre de la base de datos*
+MONGO_URL="mongodb+srv://backend:Passw0rd@cluster0.rdtbnd0.mongodb.net/?retryWrites=true&w=majority"
 ```
 
 - Por ultimo ejecutar el comando

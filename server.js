@@ -77,8 +77,8 @@ passport.deserializeUser(async (email, done) => {
 app.use(express.json());
 app.use(expressSession({
   store: new MongoStore({
-    mongoUrl: "mongodb+srv://backend:Passw0rd@cluster0.rdtbnd0.mongodb.net/?retryWrites=true&w=majority",
-    ttl: 60
+    mongoUrl: process.env.MONGO_URL,
+    ttl: 600
   }),
   secret: "shhh",
   resave: true,

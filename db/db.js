@@ -1,6 +1,6 @@
 import mongoose, {Schema} from "mongoose";
 
-mongoose.connect("mongodb+srv://backend:Passw0rd@cluster0.rdtbnd0.mongodb.net/?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGO_URL);
 
 class DB {
     constructor(schema){
