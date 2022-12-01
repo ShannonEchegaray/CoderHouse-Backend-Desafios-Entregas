@@ -1,5 +1,19 @@
 // init project
 import express from "express";
+import minimist from "minimist";
+
+const params = minimist(process.argv.slice(2), {
+  alias : {
+    p: "PORT"
+  },
+  default: {
+    p: 8080
+  }
+});
+
+const {PORT} = params
+
+
 import {initServer, emit} from "./socket.js";
 import http from "http";
 import bodyParser from "body-parser";
@@ -11,10 +25,8 @@ import { Strategy as LocalStrategy } from "passport-local";
 import UserModel from "./models/user.js";
 import { encryptPassword, isValidPassword } from "./utils.js";
 
-
 const app = express();
 
-const PORT = process.env.PORT || 8080;
 
 const options = {
   usernameField: "email"
@@ -107,6 +119,6 @@ const server = http.createServer(app);
 initServer(server);
 
 server.listen(PORT, function() {
-  console.log("Your app is listening on port " + PORT);
+  console.log("Your app is listening on " + `${process.env.NODE_URL}:${PORT}/`);
   console.log("Environment: " + process.env.NODE_ENV);
 })

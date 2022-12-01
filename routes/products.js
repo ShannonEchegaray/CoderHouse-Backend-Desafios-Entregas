@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { faker } from '@faker-js/faker';
+import {fork} from "child_process";
 
 faker.locale = 'es';
 const { commerce, image } = faker;
@@ -23,5 +24,25 @@ router.get('/productos-test', (req, res, next) => {
             next(error);
       }
 });
+
+router.get("/random", (req, res) => {
+
+      const {cant = 1000000} = req.query;
+      if(isNaN(Number(cant))){
+          res.json({error: "El numero ingresado es un string"})
+      } else {
+          console.log(cant)
+          const child = fork("calculo.js");
+            
+            child.on("message", (result) => {
+                  if(result == "ready"){
+                        child.send(Number(cant))
+                  } else {
+                        console.log("llegue aqui")
+                        res.json(result)
+                  }
+            })
+      }
+})
 
 export default router;
