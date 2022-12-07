@@ -1,19 +1,12 @@
 // init project
+import dotenv from "dotenv";
+
+dotenv.config();
+
 import express from "express";
 import minimist from "minimist";
-
-const params = minimist(process.argv.slice(2), {
-  alias : {
-    p: "PORT"
-  },
-  default: {
-    p: 8080
-  }
-});
-
-const {PORT} = params
-
-
+import os from "os";
+import cluster from "cluster";
 import {initServer, emit} from "./socket.js";
 import http from "http";
 import bodyParser from "body-parser";
@@ -25,7 +18,32 @@ import { Strategy as LocalStrategy } from "passport-local";
 import UserModel from "./models/user.js";
 import { encryptPassword, isValidPassword } from "./utils.js";
 
-const app = express();
+const params = minimist(process.argv.slice(2), {
+  alias : {
+    p: "PORT",
+    m: "MODE"
+  },
+  default: {
+    p: 8080,
+    m: "fork"
+  }
+});
+
+const {PORT, MODE} = params
+
+if(MODE === "cluster" && cluster.isPrimary){  
+  const length = os.cpus().length;
+
+  for(let i = 0; i < length; i++){
+    cluster.fork();
+  }
+
+  cluster.on("exit", (worker, code, signal) => {
+    console.log(`Worker ${worker} died`);
+  })
+} else {
+
+  const app = express();
 
 
 const options = {
@@ -97,7 +115,6 @@ app.use(expressSession({
   saveUninitialized: true
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static("./static"));
 app.set("views", "./views");
 app.set("view engine", "pug");
 app.use(passport.initialize());
@@ -122,3 +139,6 @@ server.listen(PORT, function() {
   console.log("Your app is listening on " + `${process.env.NODE_URL}:${PORT}/`);
   console.log("Environment: " + process.env.NODE_ENV);
 })
+
+
+}
