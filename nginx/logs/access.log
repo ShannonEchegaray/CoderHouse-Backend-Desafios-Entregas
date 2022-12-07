@@ -17,3 +17,5 @@
 127.0.0.1 - - [07/Dec/2022:19:38:39 -0300] "GET /api/random/ HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
 127.0.0.1 - - [07/Dec/2022:19:38:48 -0300] "GET /api/random/ HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
 127.0.0.1 - - [07/Dec/2022:19:38:51 -0300] "GET /api/random/ HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
+127.0.0.1 - - [07/Dec/2022:19:39:24 -0300] "GET /api/random/ HTTP/1.1" 200 10416 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
+127.0.0.1 - - [07/Dec/2022:19:49:13 -0300] "GET /api/random/ HTTP/1.1" 200 10379 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
