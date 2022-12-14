@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { faker } from '@faker-js/faker';
 import { logger } from '../log/logger.js';
-import {fork} from "child_process";
 
 faker.locale = 'es';
 const { commerce, image } = faker;
@@ -37,16 +36,13 @@ router.get("/random", (req, res) => {
             res.json({error: "El numero ingresado es un string"})
       } else {
           console.log(cant)
-          const child = fork("calculo.js");
-            
-            child.on("message", (result) => {
-                  if(result == "ready"){
-                        child.send(Number(cant))
-                  } else {
-                        console.log("llegue aqui")
-                        res.json(result)
-                  }
-            })
+            const cantidadVeces = {};
+            for(let i = 0; i < cant; i++){
+                  const numero = Math.floor((Math.random() * 1000) + 1)
+                  if(!cantidadVeces[numero]) cantidadVeces[numero] = 0;
+                        cantidadVeces[numero]++ 
+            }
+            res.json(cantidadVeces)
       }
 })
 
