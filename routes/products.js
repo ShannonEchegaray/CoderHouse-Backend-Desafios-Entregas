@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { faker } from '@faker-js/faker';
+import { logger } from '../log/logger.js';
 import {fork} from "child_process";
 
 faker.locale = 'es';
@@ -9,6 +10,7 @@ const router = Router();
 
 router.get('/productos-test', (req, res, next) => {
       try {
+            logger.info(`Se accedio a la ruta ${req.originalUrl} con el metodo ${req.method}`)
             let data = {productos: []};
 
             for (let i = 0; i < 5; i++) {
@@ -21,15 +23,18 @@ router.get('/productos-test', (req, res, next) => {
             console.log(data);
             res.render("productos", data);
       } catch (error) {
+            logger.error(`${error.message}`)
             next(error);
       }
 });
 
 router.get("/random", (req, res) => {
 
+      logger.info(`Se accedio a la ruta ${req.originalUrl} con el metodo ${req.method}`)
       const {cant = 1000000} = req.query;
       if(isNaN(Number(cant))){
-          res.json({error: "El numero ingresado es un string"})
+            logger.error(`El numero ingresado es un string`)
+            res.json({error: "El numero ingresado es un string"})
       } else {
           console.log(cant)
           const child = fork("calculo.js");
