@@ -7,7 +7,7 @@ import compression from "compression";
 
 const router = Router();
 
-// router.use(compression());
+router.use(compression());
 
 router.use("/", routerLogin);
 router.use("/api", routerAPI);
@@ -15,16 +15,16 @@ router.use("/api", routerAPI);
 router.get("/info", (req, res) => {
     try {
         logger.info(`Se accedio a la ruta ${req.originalUrl} con el metodo ${req.method}`)
-        console.log({
-            cpus: os.cpus().length,
-            argv: process.argv.slice(2),
-            platform: process.platform,
-            version: process.version,
-            rss: process.memoryUsage(),
-            cwd: process.cwd(),
-            pe: process.execPath,
-            pid: process.pid,
-        });
+        // console.log({
+        //     cpus: os.cpus().length,
+        //     argv: process.argv.slice(2),
+        //     platform: process.platform,
+        //     version: process.version,
+        //     rss: process.memoryUsage(),
+        //     cwd: process.cwd(),
+        //     pe: process.execPath,
+        //     pid: process.pid,
+        // });
         res.json({
             cpus: os.cpus().length,
             argv: process.argv.slice(2),
