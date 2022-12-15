@@ -1,0 +1,184 @@
+Statistical profiling result from prof-infoConConsoleLog.log, (3090 ticks, 1 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+   2636   85.3%          C:\Windows\SYSTEM32\ntdll.dll
+    427   13.8%          C:\Program Files\nodejs\node.exe
+      1    0.0%          C:\Windows\system32\mswsock.dll
+      1    0.0%          C:\Windows\System32\WS2_32.dll
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      2    0.1%    8.0%  LazyCompile: *serializeInto C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\bson\lib\parser\serializer.js:553:23
+      2    0.1%    8.0%  LazyCompile: *deserializeObject C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\bson\lib\parser\deserializer.js:65:27
+      1    0.0%    4.0%  LazyCompile: *syncExports node:internal/bootstrap/loaders:287:14
+      1    0.0%    4.0%  LazyCompile: *size C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\denque\index.js:96:38
+      1    0.0%    4.0%  LazyCompile: *serializeObject C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\bson\lib\parser\serializer.js:260:25
+      1    0.0%    4.0%  LazyCompile: *resolve node:path:158:10
+      1    0.0%    4.0%  LazyCompile: *onwrite node:internal/streams/writable:425:17
+      1    0.0%    4.0%  LazyCompile: *nextTick node:internal/process/task_queues:104:18
+      1    0.0%    4.0%  LazyCompile: *next C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\express\lib\router\index.js:177:16
+      1    0.0%    4.0%  LazyCompile: *formatRaw node:internal/util/inspect:796:19
+      1    0.0%    4.0%  LazyCompile: *_unrefTimer node:net:417:52
+      1    0.0%    4.0%  LazyCompile: *Long.isNegative C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\bson\lib\long.js:493:42
+      1    0.0%    4.0%  LazyCompile: *Binary C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\bson\lib\binary.js:42:20
+      1    0.0%    4.0%  Function: ^wrapSafe node:internal/modules/cjs/loader:1017:18
+      1    0.0%    4.0%  Function: ^set maxAge C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\express-session\session\cookie.js:83:13
+      1    0.0%    4.0%  Function: ^resolve node:path:158:10
+      1    0.0%    4.0%  Function: ^maybeCallback C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\mongodb\lib\utils.js:335:23
+      1    0.0%    4.0%  Function: ^makeOperationHandler C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\mongodb\lib\sdam\server.js:325:30
+      1    0.0%    4.0%  Function: ^getcookie C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\express-session\index.js:529:19
+      1    0.0%    4.0%  Function: ^compareTimersLists node:internal/timers:400:28
+      1    0.0%    4.0%  Function: ^Transform.push C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\winston\node_modules\readable-stream\lib\_stream_transform.js:137:37
+      1    0.0%    4.0%  Function: ^Socket.read node:net:639:33
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+     24    0.8%   96.0%  JavaScript
+      0    0.0%    0.0%  C++
+     29    0.9%  116.0%  GC
+   3065   99.2%          Shared libraries
+      1    0.0%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   2636   85.3%  C:\Windows\SYSTEM32\ntdll.dll
+    135    5.1%    LazyCompile: *writeOrBuffer node:internal/streams/writable:365:23
+     84   62.2%      LazyCompile: *Writable.write node:internal/streams/writable:333:36
+     43   51.2%        Function: ^value node:internal/console/constructor:257:20
+     43  100.0%          Function: ^log node:internal/console/constructor:358:6
+     43  100.0%            C:\Program Files\nodejs\node.exe
+     40   47.6%        Function: ^log C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\winston\lib\winston\transports\console.js:44:6
+     40  100.0%          Function: ^_write C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\winston-transport\index.js:69:51
+     40  100.0%            Function: ^doWrite C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\winston-transport\node_modules\readable-stream\lib\_stream_writable.js:404:17
+      1    1.2%        Function: ^ondata node:internal/streams/readable:752:18
+      1  100.0%          LazyCompile: *readableAddChunk node:internal/streams/readable:236:26
+      1  100.0%            Function: ^Readable.push node:internal/streams/readable:227:35
+     44   32.6%      LazyCompile: *_write node:internal/streams/writable:283:16
+     44  100.0%        Function: ^Writable.write node:internal/streams/writable:333:36
+     21   47.7%          Function: ^value node:internal/console/constructor:257:20
+     21  100.0%            Function: ^log node:internal/console/constructor:358:6
+     20   45.5%          Function: ^log C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\winston\lib\winston\transports\console.js:44:6
+     20  100.0%            Function: ^_write C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\winston-transport\index.js:69:51
+      3    6.8%          Function: ^ondata node:internal/streams/readable:752:18
+      3  100.0%            LazyCompile: *emit node:events:340:44
+      7    5.2%      Function: ^_write node:internal/streams/writable:283:16
+      7  100.0%        Function: ^Writable.write node:internal/streams/writable:333:36
+      4   57.1%          Function: ^value node:internal/console/constructor:257:20
+      4  100.0%            Function: ^log node:internal/console/constructor:358:6
+      2   28.6%          Function: ^log C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\winston\lib\winston\transports\console.js:44:6
+      2  100.0%            Function: ^_write C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\winston-transport\index.js:69:51
+      1   14.3%          Function: ^ondata node:internal/streams/readable:752:18
+      1  100.0%            LazyCompile: *emit node:events:340:44
+
+    427   13.8%  C:\Program Files\nodejs\node.exe
+    274   64.2%    C:\Program Files\nodejs\node.exe
+     65   23.7%      Function: ^handleWriteReq node:internal/stream_base_commons:45:24
+     65  100.0%        Function: ^writeGeneric node:internal/stream_base_commons:151:22
+     65  100.0%          Function: ^Socket._writeGeneric node:net:769:42
+     65  100.0%            Function: ^Socket._write node:net:806:35
+     35   12.8%      Function: ^compileFunction node:vm:308:25
+     35  100.0%        Function: ^wrapSafe node:internal/modules/cjs/loader:1017:18
+     35  100.0%          Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+     34   97.1%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1    2.9%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1110:37
+     26    9.5%      Function: ^moduleStrategy node:internal/modules/esm/translators:134:56
+     26  100.0%        Function: ^moduleProvider node:internal/modules/esm/loader:229:28
+     26  100.0%          C:\Program Files\nodejs\node.exe
+     17    6.2%      Function: ^stat node:internal/modules/cjs/loader:151:14
+     12   70.6%        Function: ^tryFile node:internal/modules/cjs/loader:384:17
+     11   91.7%          Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+     11  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      1    8.3%          LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+      1  100.0%            Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      5   29.4%        Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      5  100.0%          Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      5  100.0%            Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      9    3.3%      Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      7   77.8%        Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      2   28.6%          Function: ~<anonymous> node:internal/cluster/primary:1:1
+      2  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2   28.6%          Function: ~<anonymous> node:crypto:1:1
+      2  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1   14.3%          LazyCompile: ~get node:dns:334:8
+      1  100.0%            C:\Program Files\nodejs\node.exe
+      1   14.3%          Function: ~<anonymous> node:http:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1   14.3%          Function: ~<anonymous> node:http2:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1   11.1%        LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      1  100.0%          Function: ^loadNativeModule node:internal/modules/cjs/helpers:44:26
+      1  100.0%            LazyCompile: ~Module._load node:internal/modules/cjs/loader:757:24
+      1   11.1%        Function: ^compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      1  100.0%          Function: ^loadNativeModule node:internal/modules/cjs/helpers:44:26
+      1  100.0%            Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      8    2.9%      Function: ^realpathSync node:fs:2408:22
+      7   87.5%        Function: ^toRealPath node:internal/modules/cjs/loader:393:20
+      6   85.7%          Function: ^tryFile node:internal/modules/cjs/loader:384:17
+      4   66.7%            Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+      2   33.3%            LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+      1   14.3%          LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+      1  100.0%            Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      1   12.5%        Function: ^defaultResolve node:internal/modules/esm/resolve:981:24
+      1  100.0%          Function: ^resolve node:internal/modules/esm/loader:402:16
+      1  100.0%            Function: ^getModuleJob node:internal/modules/esm/loader:221:21
+      6    2.2%      Function: ^cpus node:os:133:14
+      6  100.0%        Function: ^<anonymous> file:///C:/Users/Shannon/Desktop/cursoDesarrollo/backend/Desarollo-Backend---Shannon-Echegaray/routes/index.js:15:21
+      6  100.0%          Function: ^handle C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\express\lib\router\layer.js:86:49
+      6  100.0%            Function: ^next C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\express\lib\router\route.js:116:16
+      5    1.8%      C:\Program Files\nodejs\node.exe
+      1   20.0%        Function: ~<anonymous> C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\engine.io\node_modules\debug\src\node.js:1:1
+      1  100.0%          Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+      1  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1   20.0%        Function: ~<anonymous> C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\@mapbox\node-pre-gyp\lib\util\versioning.js:1:1
+      1  100.0%          Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+      1  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1   20.0%        Function: ^removeColors node:internal/util:76:22
+      1  100.0%          Function: ^isBelowBreakLength node:internal/util/inspect:1740:28
+      1  100.0%            Function: ^reduceToSingleString node:internal/util/inspect:1764:30
+      1   20.0%        Function: ^getOwn node:internal/bootstrap/loaders:180:16
+      1  100.0%          Function: ^syncExports node:internal/bootstrap/loaders:287:14
+      1  100.0%            Function: ^<anonymous> node:internal/bootstrap/loaders:273:15
+      1   20.0%        Function: ^fromString C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\mongodb\lib\utils.js:314:22
+      1  100.0%          Function: ^ns C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\mongodb\lib\utils.js:292:12
+      1  100.0%            Function: ^measureRoundTripTime C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\mongodb\lib\sdam\monitor.js:288:30
+      4    1.5%      Function: ^openSync node:fs:576:18
+      4  100.0%        Function: ^readFileSync node:fs:450:22
+      4  100.0%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      4  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:969:33
+      4    1.5%      Function: ^initialize C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\passport\lib\middleware\initialize.js:51:29
+      4  100.0%        Function: ^handle C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\express\lib\router\layer.js:86:49
+      4  100.0%          Function: ^trim_prefix C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\express\lib\router\index.js:293:23
+      2   50.0%            LazyCompile: *next C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\express\lib\router\index.js:177:16
+      2   50.0%            Function: ^<anonymous> C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\express\lib\router\index.js:280:64
+      3    1.1%      LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      3  100.0%        LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1   33.3%          LazyCompile: ~initializeSourceMapsHandlers node:internal/bootstrap/pre_execution:461:38
+      1  100.0%            LazyCompile: ~prepareMainThreadExecution node:internal/bootstrap/pre_execution:23:36
+      1   33.3%          Function: ~<anonymous> node:internal/modules/esm/get_source:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1   33.3%          Function: ~<anonymous> node:internal/bootstrap/pre_execution:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      3    1.1%      Function: ^readSync node:fs:684:18
+      2   66.7%        Function: ^tryReadSync node:fs:429:21
+      2  100.0%          Function: ^readFileSync node:fs:450:22
+      2  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1   33.3%        LazyCompile: ~tryReadSync node:fs:429:21
+      1  100.0%          LazyCompile: ~readFileSync node:fs:450:22
+      1  100.0%            LazyCompile: ~cjsPreparseModuleExports node:internal/modules/esm/translators:212:34
+      3    1.1%      Function: ^promisify node:internal/util:324:19
+      3  100.0%        Function: ^AbstractOperation C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\mongodb\lib\operations\operation.js:26:16
+      3  100.0%          Function: ^CommandOperation C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\mongodb\lib\operations\command.js:13:16
+      2   66.7%            Function: ^UpdateOperation C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\mongodb\lib\operations\update.js:10:16
+      1   33.3%            Function: ^FindOperation C:\Users\Shannon\Desktop\cursoDesarrollo\backend\Desarollo-Backend---Shannon-Echegaray\node_modules\mongodb\lib\operations\find.js:12:16
+
