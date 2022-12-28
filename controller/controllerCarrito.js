@@ -1,26 +1,8 @@
 import {validateNumber} from "../utils/validation.js";
 
-let Carrito;
-let carritoApi;
-
-switch(process.env.NODE_BASE){
-    case "memory":
-        Carrito = await import("../daos/carrito/memory.js");
-        carritoApi = new Carrito.default()
-    break;
-    case "file":
-        Carrito = await import("../daos/carrito/file.js");
-        carritoApi = new Carrito.default("carritos.json")
-    break;
-    case "mongodb":
-        Carrito = await import("../daos/carrito/mongodb.js");
-        const schema = await import("../contenedores/mongo/carritos.js");
-        carritoApi = new Carrito.default(schema.default)
-    break;
-    case "firestore":
-        Carrito = await import("../daos/carrito/firestore.js");
-        carritoApi = new Carrito.default("carritos")
-}
+const Carrito = await import("../daos/carrito/mongodb.js");
+const schema = await import("../contenedores/mongo/carritos.js");
+const carritoApi = new Carrito.default(schema.default)
 
 const agregarCarrito = async (req, res, next) => {
     try {

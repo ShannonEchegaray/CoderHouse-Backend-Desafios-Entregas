@@ -7,9 +7,9 @@ class ContMongoDB {
         mongoose.connect(URI).then(() => console.log("Conectado a la base de datos"))
     }
 
-    async read(){
+    async read(query = {}){
         try {
-            return await this.collection.find({}, {}); 
+            return await this.collection.find(query, {}); 
         } catch (error) {
             throw error
         }

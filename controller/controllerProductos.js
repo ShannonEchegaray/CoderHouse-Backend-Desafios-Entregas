@@ -1,26 +1,9 @@
 import {validateNumber, validateParams, productStructureKeys} from "../utils/validation.js";
 
-let Producto, productoApi;
+const Producto = await import("../daos/productos/mongodb.js");
+const schema = await import("../contenedores/mongo/productos.js");
+const productoApi = new Producto.default(schema.default)
 
-switch(process.env.NODE_BASE){
-    case "memory":
-        Producto = await import("../daos/productos/memory.js");
-        productoApi = new Producto.default()
-    break;
-    case "file":
-        Producto = await import("../daos/productos/file.js");
-        productoApi = new Producto.default("productos.json")
-    break;
-    case "mongodb":
-        Producto = await import("../daos/productos/mongodb.js");
-        const schema = await import("../contenedores/mongo/productos.js");
-        productoApi = new Producto.default(schema.default)
-    break;
-    case "firestore":
-        Producto = await import("../daos/productos/firestore.js");
-        console.log(Producto)
-        productoApi = new Producto.default("productos")
-}
 
 const listarProductos = async (req, res, next) => {
     try {

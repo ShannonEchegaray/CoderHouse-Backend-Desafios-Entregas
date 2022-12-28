@@ -4,54 +4,61 @@ import {NotFoundError} from "../../utils/errors.js";
 class Producto extends ContMongoDB{
      constructor(schema){
         super(schema);
-        super.read().then(data => {
-            data.sort((a,b) => a - b);
-            this.idCount = data[data.length - 1]?.id + 1 || 1;
-        })
     }
 
     async listarProductos(){
-        const data = await super.read()
+        let data;
+        try {
+            data = await super.read()
+        } catch (error) {
+            throw error;
+        }
         return data;
     }
 
     async listarProductosId(id){
-        const data = await super.read()
-        const search = data.find(el => el.id === +id);
-        if(!search) throw new NotFoundError("El id solicitado no se encuentra");
-        return search;
+        let data;
+        try {
+            data = await super.read({id}) 
+        } catch (error) {
+            throw error;
+        }
+        return data;
     }
 
     async agregarProducto(product){
-        product = {id: this.idCount++, ...product}
+        product = {...product}
 
-        await super.saveItem(product);
+        const savedProduct = await super.saveItem(product);
 
-        return product.id;
+        return savedProduct._id;
     }
 
     async actualizarProducto(id, properties){
-        const data = await super.read();
-        const productToUpdate = data.findIndex(el => el.id === +id);
-        
-        if(productToUpdate === -1) throw new NotFoundError("El id solicitado no se encuentra")
+        let data;
+        try {
+            data = await super.read({id})
+            data = {
+                    ...data,
+                    ...properties
+                    }; 
+            const updatedData = await super.updateItem(data._id, data);
+            return updatedData;
+    } catch (error) {
+            throw error;
+        }
+        return data;
 
-        Object.keys(properties).forEach(key => {
-            data[productToUpdate][key] = properties[key]
-        })
-
-        await super.updateItem(data[productToUpdate]._id, data[productToUpdate]);
-        return data[productToUpdate]
     }
 
     async eliminarProducto(id){
-        const data = await super.read(this.filename);
-        const productToDelete = data.findIndex(el => el.id === +id);
-        
-        if(productToDelete === -1) throw new NotFoundError("El id solicitado no se encuentra")
-
-        await super.deleteItem(data[productToDelete]._id);
-
+        try {
+            const data = await super.read({id});
+            await super.deleteItem(data[productToDelete]._id);
+            
+        } catch (error) {
+            throw error;
+        }
     }
 }
 
