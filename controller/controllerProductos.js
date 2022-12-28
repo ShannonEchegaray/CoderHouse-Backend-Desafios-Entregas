@@ -17,7 +17,6 @@ const listarProductos = async (req, res, next) => {
 const listarProductosId = async (req, res, next) => {
     try {
         const id = req.params.id;
-        validateNumber(id, "El id no es un numero");
         const producto = await productoApi.listarProductosId(id);
         res.status(200).json(producto);
     } catch (error) {
@@ -40,9 +39,6 @@ const agregarProducto = async (req, res, next) => {
 
 const actualizarProducto = async (req, res, next) => {
     try {
-        console.log("probando")
-        validateNumber(req.params.id, "El id no es un numero");
-        console.log("pase la prueba")
         const newProduct = await productoApi.actualizarProducto(req.params.id, req.body)
         res.status(200).json(newProduct)
     } catch (error) {
@@ -54,7 +50,6 @@ const actualizarProducto = async (req, res, next) => {
 const eliminarProducto = async (req, res, next) => {
     try {
         const id = req.params.id
-        validateNumber(id, "El id no es un numero");
         await productoApi.eliminarProducto(id);
         res.status(204).send()
     } catch (error) {

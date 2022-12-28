@@ -1,7 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
 const producto = new Schema({
-      id: {type: Number, required: true},
       nombre: { type: String, required: true },
       descripcion: { type: String, required: true },
       stock: { type: Number, required: true },

@@ -20,6 +20,7 @@ class Producto extends ContMongoDB{
         let data;
         try {
             data = await super.read({id}) 
+            console.log(data);
         } catch (error) {
             throw error;
         }
@@ -38,24 +39,21 @@ class Producto extends ContMongoDB{
         let data;
         try {
             data = await super.read({id})
-            data = {
-                    ...data,
-                    ...properties
-                    }; 
+            Object.keys(properties).forEach(key => {
+                data[key] = properties[key];
+            })
+            console.log(data);
             const updatedData = await super.updateItem(data._id, data);
             return updatedData;
     } catch (error) {
             throw error;
         }
-        return data;
-
     }
 
     async eliminarProducto(id){
         try {
             const data = await super.read({id});
-            await super.deleteItem(data[productToDelete]._id);
-            
+            await super.deleteItem(data._id);
         } catch (error) {
             throw error;
         }

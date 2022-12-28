@@ -7,6 +7,7 @@ const validateNumber = (number, message) => {
 }
 
 const validateParams = (params, objectToValidate) => {
+    console.log(params, objectToValidate);
     params.forEach(key => {
         if(!objectToValidate[key]) throw new BadRequestError("Un parametro no ha sido ingresado")
     });

@@ -9,7 +9,8 @@ class ContMongoDB {
 
     async read(query = {}){
         try {
-            return await this.collection.find(query, {}); 
+            const result = await this.collection.find(query, {__v: 0});
+            return Object.keys(query).length ? result[0] : result; 
         } catch (error) {
             throw error
         }
