@@ -4,7 +4,7 @@ const auth = (req, res, next) => {
     if(req.isAuthenticated()){
         next()
     } else {
-        res.redirect("/login")
+        res.redirect("/api/login")
     }
 }
 
@@ -14,13 +14,13 @@ const unauthorized = (req, res) => {
 
 const getRegister= (req, res) => {
     if(req.isAuthenticated())
-        return res.redirect("/");
+        return res.redirect("/api/");
     res.render("register");
 }
 
 const getLogin = (req, res) => {
     if(req.isAuthenticated())
-        return res.redirect("/");
+        return res.redirect("/api/");
     res.render("login");
 }
 
@@ -31,7 +31,6 @@ const logout = (req, res, next) => {
             return next(error);
         let data = {username: user.email};
         res.render("logout", data);
-
     })
 };
 

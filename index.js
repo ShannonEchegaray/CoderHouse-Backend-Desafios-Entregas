@@ -30,8 +30,14 @@ app.use(expressSession({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use("/api", router)
+
+app.get("/", (req, res) => {
+  res.redirect("/api")
+})
+
+app.set("views", "./views");
+app.set("view engine", "pug");
 app.use(errorHandler)
 
 // listen for requests :)
