@@ -2,6 +2,7 @@ import { Strategy } from "passport-local";
 import { encryptPassword, isValidPassword } from "../utils/bcrypt.js";
 import UserModel from "../contenedores/mongo/usuarios.js";
 import passport from "passport";
+import path from "path";
 
 const options = {
   usernameField: "email"
@@ -26,16 +27,23 @@ passport.use("login", new Strategy(options, async (email, password, done) => {
   }
 }))
 
-passport.use("register", new Strategy(options, async (email, password, done) => {
+passport.use("register", new Strategy({...options, passReqToCallback: true}, async (req, email, password, done) => {
   try {
+    console.log(email, password);
     const user = await UserModel.findOne({email})
       if(user){
         console.log(`El usuario ${email} ya existe`);
         return done(null, false, {message: `El Usuario ${email} ya existe`});
       }
+      const {name, age, phone_number} = req.body;
+      const fileDest = `${req.file.destination.slice(1)}/${req.file.filename}`;
       const newUser = {
         email,
-        password: encryptPassword(password)
+        password: encryptPassword(password),
+        name,
+        age,
+        phone_number,
+        file: fileDest
       };
     const created = await UserModel.create(newUser);
     console.log(created);
@@ -48,12 +56,10 @@ passport.use("register", new Strategy(options, async (email, password, done) => 
 }))
 
 passport.serializeUser((user, done) => {
-  console.log(`serialize user -> user ${user}`);
   done(null, user.email);
 })
 
 passport.deserializeUser(async (email, done) => {
-  console.log(`deserialize user -> user ${email}`);
   try {
     done(null, await UserModel.findOne({email}));
   } catch (error) {

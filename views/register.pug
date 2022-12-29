@@ -13,12 +13,28 @@ block content
             section.row.justify-content-center.mb-4
                 a.btn.btn-danger.m-4.col-2(href="/api/login") Ir a Login
                 h2.text-center.mb-4 Formulario de registro
-                form#enviarProducto.col-6.d-flex.flex-column.align-items-center.justify-content-center.border.rounded.py-4(action='/api/register' method='POST')
+                form#enviarProducto.col-6.d-flex.flex-column.align-items-center.justify-content-center.border.rounded.py-4(action='/api/register' method='POST' enctype="multipart/form-data")
                     .mb-3
                         label.form-label.text-center.d-block(for='email') Email
                         input#nombreProducto.w-100.px-4.form-control(required='' type='text' placeholder='Ingrese su email...' name='email')
                     .mb-3
                         label.form-label.text-center.d-block(for='password') Contraseña
                         input#nombreProducto.w-100.px-4.form-control(required='' type='password' placeholder='Ingrese su contraseña...' name='password')
+                    .mb-3
+                        label.form-label.text-center.d-block(for='name') Nombre
+                        input#nombreProducto.w-100.px-4.form-control(required='' type='text' placeholder='Ingrese su nombre...' name='name')
+                    .mb-3
+                        label.form-label.text-center.d-block(for='direction') Direccion
+                        input#nombreProducto.w-100.px-4.form-control(required='' type='text' placeholder='Ingrese su Direccion...' name='direction')
+                    .mb-3
+                        label.form-label.text-center.d-block(for='age') Edad
+                        input#nombreProducto.w-100.px-4.form-control(required='' type='number' placeholder='Ingrese su Edad...' name='age')
+                    .mb-3
+                        label.form-label.text-center.d-block(for='phone-number') Numero de Telefono
+                        input#nombreProducto.w-100.px-4.form-control(required='' type='text' placeholder='Ingrese su Numero de Telefono...' name='phone_number')
+                    .mb-3
+                        label.form-label.text-center.d-block(for='avatar') Avatar
+                        input#nombreProducto.w-100.px-4.form-control(required='' type='file' placeholder='Ingrese un archivo de avatar...' name='avatar')
+
                     input.btn.btn-danger(type='submit' value='Enviar')
                 
