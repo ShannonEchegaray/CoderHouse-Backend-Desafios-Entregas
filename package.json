@@ -5,9 +5,9 @@
     "main": "server.js",
     "type": "module",
     "scripts": {
-        "start": "node -r dotenv/config server.js -p 7648",
-        "dev": "node -r dotenv/config server.js -p 7648",
-        "dev:wait": "node ./node_modules/nodemon/bin/nodemon.js --exec \"node -r dotenv/config server.js -p 7648\""
+        "start": "node -r dotenv/config server.js -p 8080",
+        "dev": "node -r dotenv/config server.js -p 8080",
+        "dev:wait": "node ./node_modules/nodemon/bin/nodemon.js --exec \"node -r dotenv/config server.js -p 8080\""
     },
     "dependencies": {
         "@faker-js/faker": "^7.6.0",
