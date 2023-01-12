@@ -1,6 +1,6 @@
-# Debugging, profiling & logger
+# Desafio-15: Arquitectura de Capas
 
-En este proyecto se verificara la performance gracias a artillery, autocannon y x0
+En este proyecto se aplicara arquitectura de capas
 
 ## Configuracion
 
@@ -13,7 +13,7 @@ git clone https://github.com/ShannonEchegaray/Desarollo-Backend---Shannon-Echega
 - A continuacion, ya descargado ejecutar los siguiente comando desde la carpeta "Desarrollo-Backend---Shannon-Echegaray"
 
 ```
-git checkout desafio-14
+git checkout desafio-15
 npm install
 ```
 
